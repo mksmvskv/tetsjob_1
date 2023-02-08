@@ -8,6 +8,7 @@ pipeline {
                 sh 'whoami'
                 sh 'hostname'
                 sh 'ip a'
+                sh 'pwd'
             }
         }
         stage('Delete workspace before build starts') {
