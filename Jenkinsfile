@@ -6,6 +6,8 @@ pipeline {
                 echo 'Hello World'
                 sh 'ls -la'
                 sh 'whoami'
+                sh 'hostname'
+                sh 'ip a'
             }
         }
     }
