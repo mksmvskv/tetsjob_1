@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Copy index file') {
             steps {
-                sh 'cp index.html /var/www/html/index.html'
+                sh 'sudo cp index.html /var/www/html/index.html'
                 sh 'ls -la /var/www/html/'
             }
         }
