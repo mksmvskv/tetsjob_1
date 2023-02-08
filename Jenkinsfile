@@ -17,5 +17,11 @@ pipeline {
                 deleteDir()
             }
         }
+                stage('Check workspace') {
+            steps {
+                sh 'pwd'
+                sh 'ls -la'
+            }
+        }
     }
 }
