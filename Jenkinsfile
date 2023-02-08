@@ -16,12 +16,12 @@ pipeline {
                 sh 'cp index.html /var/www/html/index.html'
                 sh 'ls -la /var/www/html/'
             }
+        }
         stage('Delete workspace before build starts') {
             steps {
                 echo 'Deleting workspace'
                 deleteDir()
             }
-        }
         }
     }
 }
