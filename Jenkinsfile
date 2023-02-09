@@ -1,18 +1,27 @@
 pipeline {
     agent { label 'webserver1' }
+        parameters {
+        choice(name: 'VERSION', choices: ['2.0', '3.0', '4.0', '5.0'], description: '')
+    }
+
     stages {
         stage('Docker build') {
             steps {
-                echo 'Build container'
-                sh 'docker build -t mynginx:2.0 .'
+                withCredentials([usernamePassword(credentialsId: 'docker_repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                sh "docker build -t mksmvskv/mynginx:{$VERSION} ."
+                sh "echo $PASS | docker login -u $USER --password-stdin"
+                sh "docker push mksmvskv/mynginx:{$VERSION}"
+    }
+
             }
         }
         stage('Docker RUN') {
             steps {
-                sh 'docker run --name mynginx_2 -p 8080:80 -d mynginx:2.0'
+                echo 'Start container'
+                //sh 'docker run --name mynginx_2 -p 8080:80 -d mynginx:2.0'
             }
         }
-        stage('Delete workspace before build starts') {
+        stage('Delete workspace after all steps') {
             steps {
                 echo 'Deleting workspace'
                 deleteDir()
