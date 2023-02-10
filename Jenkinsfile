@@ -2,14 +2,13 @@ pipeline {
     agent { label 'webserver1' }
         parameters {
         choice(name: 'VERSION', choices: ['2.0', '3.0', '4.0', '5.0'], description: '')
-    }
+        }
 
-    stages {
-        stage('Docker build') {
-            steps {
-                script("$VERSION")
-    }
-
+        stages {
+            stage('Docker build') {
+                steps {
+                    script("$VERSION")
+                }
             }
         }
         stage('Docker RUN') {
