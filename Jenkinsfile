@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Docker build') {
             steps {
-                script("$VERSION")
+                script_func("$VERSION")
 
             }
         }
