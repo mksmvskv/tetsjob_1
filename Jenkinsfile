@@ -20,7 +20,7 @@ pipeline {
         stage('Docker build') {
             steps {
                 script{
-                    sf.builddocker()
+                    groovyscript.builddocker()
                 }
             }
         }
