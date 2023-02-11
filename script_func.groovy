@@ -5,3 +5,4 @@ def builddocker() {
         sh "docker push mksmvskv/mynginx:${param.VERSION}"
     }
 }
+return this
