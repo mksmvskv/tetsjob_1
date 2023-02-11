@@ -1,13 +1,27 @@
+def groovyscript
+
 pipeline {
     agent { label 'webserver1' }
         parameters {
-        choice(name: 'VERSION', choices: ['2.0', '3.0', '4.0', '5.0'], description: '')
+        choice(name: 'VERSION', choices: ['6.0', '7.0', '8.0', '9.0'], description: '')
         }
+    
     stages {
+        
+        stage('Script init'){
+            steps {
+                script{
+                    sf = load "script_func.groovy"
+                }
+            }
+            
+        }
+        
         stage('Docker build') {
             steps {
-                script_func()
-
+                script{
+                    sf.builddocker()
+                }
             }
         }
         stage('Docker RUN') {
