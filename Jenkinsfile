@@ -1,16 +1,11 @@
 pipeline {
     agent { label 'windows' }
-        parameters {
-        choice(name: 'VERSION', choices: ['6.0', '7.0', '8.0', '9.0'], description: '')
-        }
-    
+
     stages {
                 
-        stage('Docker build') {
+        stage('Try DSC') {
             steps {
-                script{
-                    groovyscript.builddocker()
-                }
+                bat 'powershell.exe -File run.ps1' 
             }
         }
 
