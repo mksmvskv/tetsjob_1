@@ -5,6 +5,7 @@ pipeline {
                 
         stage('Try DSC') {
             steps {
+                bat 'dir'
                 bat 'powershell.exe -File run.ps1' 
             }
         }
