@@ -13,7 +13,6 @@ properties([
             description: 'OS version to use',
             name: 'VM_TEMPLATE'
         ),
-        choise
         choice(
             choices: [
                 'Outlook, Excel, Word',
