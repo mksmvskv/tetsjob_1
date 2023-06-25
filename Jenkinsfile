@@ -31,8 +31,8 @@ String vmTemplate = "${params.VM_TEMPLATE}"
 
 node{
     stage ("Tets stage") {
-        sh """
-            echo $testTargets
+        echo """
+            echo \$testTargets
         """
     }
 }
