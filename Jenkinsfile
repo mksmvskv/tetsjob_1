@@ -3,28 +3,16 @@ properties([
         booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
         booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
         booleanParam(defaultValue: false, description: 'Word', name: 'Word'),
-        [$class: 'ChoiceParameter',
-            choiceType: 'PT_CHECKBOX', 
-            description: 'Select Options', 
-            filterLength: 1, 
-            filterable: false, 
-            name: 'Options', 
-            randomName: 'choice-parameter-5631311594605653', 
+        [$class: 'ActiveChoicesParameterDefinition',
+            name: 'Choices',
+            description: 'Select your choices',
             script: [
-                $class: 'GroovyScript', 
-                fallbackScript: [
-                    classpath: [], 
-                    sandbox: false, 
-                    script: 
-                    'return["error"]'
-                ], 
-                script: [
-                    classpath: [], 
-                    sandbox: false, 
-                    script: 
-                    'return["Option1", "Option2", "Option3"]'
-                ]
-            ]
+                $class: 'GroovyScript',
+                script: 'return["Option1", "Option2", "Option3"]',
+                fallbackScript: 'return["Error"]'
+            ],
+            choiceType: 'CHECKBOX',
+            filterable: false
         ]
     ])
 ])
