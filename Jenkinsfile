@@ -1,8 +1,8 @@
 properties([
     parameters([
-        booleanParam(defaultValue: true, description: 'Outlool', name: 'option1'),
-        booleanParam(defaultValue: false, description: 'Excel', name: 'option2'),
-        booleanParam(defaultValue: false, description: 'Word', name: 'option3')
+        booleanParam(defaultValue: true, description: 'Outlool', name: 'Outlool'),
+        booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
+        booleanParam(defaultValue: false, description: 'Word', name: 'Word')
     ])
 ])
 
