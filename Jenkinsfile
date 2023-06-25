@@ -8,14 +8,14 @@ properties([
 
 node {
     def options = []
-    if (params.option1) {
-        options.add('Option1')
+    if (params.Outlool) {
+        options.add('Outlool')
     }
-    if (params.option2) {
-        options.add('Option2')
+    if (params.Excel) {
+        options.add('Excel')
     }
-    if (params.option3) {
-        options.add('Option3')
+    if (params.Word) {
+        options.add('Word')
     }
 
     println("Selected options: ${options}")
