@@ -1,6 +1,6 @@
 properties([
     parameters([
-        booleanParam(defaultValue: true, description: 'Outlool', name: 'Outlool'),
+        booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
         booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
         booleanParam(defaultValue: false, description: 'Word', name: 'Word')
     ])
