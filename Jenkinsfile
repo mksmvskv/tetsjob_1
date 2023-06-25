@@ -1,26 +1,23 @@
 properties([
     parameters([
-        [$class: 'ChoiceParameter', 
-            choiceType: 'PT_CHECKBOX', 
-            description: 'Select Options', 
-            filterable: false, 
-            name: 'Options', 
-            script: [
-                $class: 'GroovyScript', 
-                script: [
-                    classpath: [], 
-                    sandbox: false, 
-                    script: 
-                    'return["Option1", "Option2", "Option3"]'
-                ]
-            ]
-        ]
+        booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
+        booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
+        booleanParam(defaultValue: false, description: 'Word', name: 'Word'),
     ])
 ])
 
 node {
     stage('Processing Options') {
-        def options = params.Options.tokenize(',')
+        def options = []
+        if (params.Outlook) {
+            options.add('Outlook')
+        }
+        if (params.Excel) {
+            options.add('Excel')
+        }
+        if (params.Word) {
+            options.add('Word')
+        }
 
         println("Selected options: ${options}")
     }
