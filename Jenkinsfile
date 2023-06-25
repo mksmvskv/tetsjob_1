@@ -30,16 +30,18 @@ properties([
 ])
 
 node {
-    def options = []
-    if (params.Outlook) {
-        options.add('Outlook')
-    }
-    if (params.Excel) {
-        options.add('Excel')
-    }
-    if (params.Word) {
-        options.add('Word')
-    }
+    stage('Processing Options') {
+        def options = []
+        if (params.Outlook) {
+            options.add('Outlook')
+        }
+        if (params.Excel) {
+            options.add('Excel')
+        }
+        if (params.Word) {
+            options.add('Word')
+        }
 
-    println("Selected options: ${options}")
+        println("Selected options: ${options}")
+    }
 }
