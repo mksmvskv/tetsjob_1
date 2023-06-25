@@ -1,38 +1,29 @@
 properties([
-  parameters([
-    [
-      $class: 'ChoiceParameter',
-      choiceType: 'PT_SINGLE_SELECT',
-      name: 'Environment',
-      script: [
-        $class: 'ScriptlerScript',
-        scriptlerScriptId:'Environments.groovy'
-      ]
-    ],
-    [
-      $class: 'CascadeChoiceParameter',
-      choiceType: 'PT_SINGLE_SELECT',
-      name: 'Host',
-      referencedParameters: 'Environment',
-      script: [
-        $class: 'ScriptlerScript',
-        scriptlerScriptId:'HostsInEnv.groovy',
-        parameters: [
-          [name:'Environment', value: '$Environment']
-        ]
-      ]
-   ]
- ])
+    parameters([
+        booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
+        booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
+        booleanParam(defaultValue: false, description: 'Word', name: 'Word'),
+        choice(name: 'Choices', choices: ['None', 'Option1', 'Option2', 'Option3'], description: 'Select your choice')
+    ])
 ])
 
-pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        echo "${params.Environment}"
-        echo "${params.Host}"
-      }
+node {
+    stage('Processing Options') {
+        def options = []
+        if (params.Outlook) {
+            options.add('Outlook')
+        }
+        if (params.Excel) {
+            options.add('Excel')
+        }
+        if (params.Word) {
+            options.add('Word')
+        }
+
+        if (params.Choices != 'None') {
+            options.add(params.Choices)
+        }
+
+        println("Selected options: ${options}")
     }
-  }
 }
