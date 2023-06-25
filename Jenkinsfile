@@ -1,38 +1,22 @@
 properties([
     parameters([
-        choice(
-            choices: [
-                'WinSrv2022Std',
-                'WinSrv2019Std'
-            ],
-            description: 'OS version to use',
-            name: 'VM_TEMPLATE'
-        ),
-        choice(
-            choices: [
-                'Outlook, Excel, Word',
-                'Outlook, Excel',
-                'Outlook, Word',
-                'Excel, Word',
-                'Outlook',
-                'Excel',
-                'Word'
-            ],
-            description: 'Application, which will be tested',
-            name: 'APPTOBETESTED'
-        )
+        booleanParam(defaultValue: true, description: 'Option 1', name: 'option1'),
+        booleanParam(defaultValue: false, description: 'Option 2', name: 'option2'),
+        booleanParam(defaultValue: false, description: 'Option 3', name: 'option3')
     ])
 ])
 
-String testsTargets = "${params.APPTOBETESTED}"
-
-String vmTemplate = "${params.VM_TEMPLATE}"
-
-
-node{
-    stage ("Tets stage") {
-        echo """
-            echo $testsTargets
-        """
+node {
+    def options = []
+    if (params.option1) {
+        options.add('Option1')
     }
+    if (params.option2) {
+        options.add('Option2')
+    }
+    if (params.option3) {
+        options.add('Option3')
+    }
+
+    println("Selected options: ${options}")
 }
