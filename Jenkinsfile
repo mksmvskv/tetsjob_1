@@ -2,7 +2,7 @@ properties([
     parameters([
         booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
         booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
-        booleanParam(defaultValue: false, description: 'Word', name: 'Word')
+        booleanParam(defaultValue: false, description: 'Word', name: 'Word'),
         [$class: 'ChoiceParameter',
             choiceType: 'PT_CHECKBOX', 
             description: 'Select Options', 
@@ -31,8 +31,8 @@ properties([
 
 node {
     def options = []
-    if (params.Outlool) {
-        options.add('Outlool')
+    if (params.Outlook) {
+        options.add('Outlook')
     }
     if (params.Excel) {
         options.add('Excel')
