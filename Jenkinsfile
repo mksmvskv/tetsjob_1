@@ -1,35 +1,38 @@
 properties([
-    parameters([
-        booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
-        booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
-        booleanParam(defaultValue: false, description: 'Word', name: 'Word'),
-        [$class: 'ActiveChoicesParameterDefinition',
-            name: 'Choices',
-            description: 'Select your choices',
-            script: [
-                $class: 'GroovyScript',
-                script: 'return["Option1", "Option2", "Option3"]',
-                fallbackScript: 'return["Error"]'
-            ],
-            choiceType: 'CHECKBOX',
-            filterable: false
+  parameters([
+    [
+      $class: 'ChoiceParameter',
+      choiceType: 'PT_SINGLE_SELECT',
+      name: 'Environment',
+      script: [
+        $class: 'ScriptlerScript',
+        scriptlerScriptId:'Environments.groovy'
+      ]
+    ],
+    [
+      $class: 'CascadeChoiceParameter',
+      choiceType: 'PT_SINGLE_SELECT',
+      name: 'Host',
+      referencedParameters: 'Environment',
+      script: [
+        $class: 'ScriptlerScript',
+        scriptlerScriptId:'HostsInEnv.groovy',
+        parameters: [
+          [name:'Environment', value: '$Environment']
         ]
-    ])
+      ]
+   ]
+ ])
 ])
 
-node {
-    stage('Processing Options') {
-        def options = []
-        if (params.Outlook) {
-            options.add('Outlook')
-        }
-        if (params.Excel) {
-            options.add('Excel')
-        }
-        if (params.Word) {
-            options.add('Word')
-        }
-
-        println("Selected options: ${options}")
+pipeline {
+  agent any
+  stages {
+    stage('Build') {
+      steps {
+        echo "${params.Environment}"
+        echo "${params.Host}"
+      }
     }
+  }
 }
