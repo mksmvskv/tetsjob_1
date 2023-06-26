@@ -10,9 +10,9 @@ properties([
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
-                        'return[\'Outlook\', \'Excel\', \'Word\']'
+                        'return[\'ERROR']'
                 ], 
                 script: [
                     classpath: [], 
