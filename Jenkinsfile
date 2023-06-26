@@ -12,7 +12,7 @@ properties([
                     classpath: [], 
                     sandbox: true, 
                     script: 
-                        'return[\'ERROR']'
+                        'return[\'ERROR\']'
                 ], 
                 script: [
                     classpath: [], 
