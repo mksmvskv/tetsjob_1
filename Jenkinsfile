@@ -16,7 +16,7 @@ properties([
                 ], 
                 script: [
                     classpath: [], 
-                    sandbox: false, 
+                    sandbox: true, 
                     script: 
                         'return[\'Outlook\', \'Excel\', \'Word\']'
                 ]
