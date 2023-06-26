@@ -1,45 +1,62 @@
 properties([
-    parameters([
-        booleanParam(defaultValue: true, description: 'Outlook', name: 'Outlook'),
-        booleanParam(defaultValue: false, description: 'Excel', name: 'Excel'),
-        booleanParam(defaultValue: false, description: 'Word', name: 'Word'),
-        choice(
-            choices: [
-                'WinSrv2022Std',
-                'WinSrv2019Std'
-            ],
-            description: 'OS version to use',
-            name: 'VM_TEMPLATE'
-        ),
-        choice(
-            choices: [
-                'Outlook, Excel, Word',
-                'Outlook, Excel',
-                'Outlook, Word',
-                'Excel, Word',
-                'Outlook',
-                'Excel',
-                'Word'
-            ],
-            description: 'Application, which will be tested',
-            name: 'APPTOBETESTED'
-        )
-    ])
+parameters([
+    [$class: 'ChoiceParameter', 
+        choiceType: 'PT_SINGLE_SELECT', 
+        description: 'Select the Env Name from the Dropdown List', 
+        filterLength: 1, 
+        filterable: true, 
+        name: 'Env', 
+        randomName: 'choice-parameter-5631314439613978', 
+        script: [
+            $class: 'GroovyScript', 
+            fallbackScript: [
+                classpath: [], 
+                sandbox: false, 
+                script: 
+                    'return[\'Could not get Env\']'
+            ], 
+            script: [
+                classpath: [], 
+                sandbox: false, 
+                script: 
+                    'return["Dev","QA","Stage","Prod"]'
+            ]
+        ]
+    ], 
+    [$class: 'CascadeChoiceParameter', 
+        choiceType: 'PT_CHECKBOX', 
+        description: 'Select Servers', 
+        filterLength: 1, 
+        filterable: true, 
+        name: 'Server', 
+        randomName: 'choice-parameter-5631314456178619', 
+        referencedParameters: 'Env', 
+        script: [
+            $class: 'GroovyScript', 
+            fallbackScript: [
+                classpath: [], 
+                sandbox: false, 
+                script: 
+                    'return[\'Could not get Environment from Env Param\']'
+            ], 
+            script: [
+                classpath: [], 
+                sandbox: false, 
+                script: 
+                    ''' if (Env.equals("Dev")){
+                            return["devaaa001","devaaa002","devbbb001","devbbb002","devccc001","devccc002"]
+                        }
+                        else if(Env.equals("QA")){
+                            return["qaaaa001","qabbb002","qaccc003"]
+                        }
+                        else if(Env.equals("Stage")){
+                            return["staaa001","stbbb002","stccc003"]
+                        }
+                        else if(Env.equals("Prod")){
+                            return["praaa001","prbbb002","prccc003"]
+                        }
+                    '''
+            ]
+        ]
+    ]
 ])
-
-node {
-    stage('Processing Options') {
-        def options = []
-        if (params.Outlook) {
-            options.add('Outlook')
-        }
-        if (params.Excel) {
-            options.add('Excel')
-        }
-        if (params.Word) {
-            options.add('Word')
-        }
-
-        println("Selected options: ${options}")
-    }
-}
