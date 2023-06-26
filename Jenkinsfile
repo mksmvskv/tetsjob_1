@@ -6,14 +6,13 @@ properties([
             filterLength: 1, 
             filterable: false, 
             name: 'Software', 
-            randomName: 'choice-parameter-5631316734540', 
             script: [
                 $class: 'GroovyScript', 
                 fallbackScript: [
                     classpath: [], 
                     sandbox: false, 
                     script: 
-                        'return[\'Error\']'
+                        'return[\'Outlook\', \'Excel\', \'Word\']'
                 ], 
                 script: [
                     classpath: [], 
